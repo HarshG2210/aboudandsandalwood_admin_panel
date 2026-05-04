@@ -1,0 +1,62 @@
+import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Suspense, lazy } from "react";
+
+// LAZY PAGES
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminLayout = lazy(() => import("./layout/AdminLayout"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AdminHome = lazy(() => import("./pages/AdminHome"));
+const AdminProducts = lazy(() => import("./pages/products/AdminProducts"));
+const AdminOrders = lazy(() => import("./pages/AdminOrders"));
+const AdminUsers = lazy(() => import("./pages/AdminUsers"));
+const AdminProductDetail = lazy(() =>
+  import("./pages/products/AdminProductDetail")
+);
+
+const Loader = () => (
+  <Center h="100vh">
+    <Spinner size="xl" color="purple.400" />
+  </Center>
+);
+
+export default function AdminApp() {
+  const location = useLocation();
+
+  // 🔐 TOKEN CHECK
+  const token = localStorage.getItem("admin_access");
+
+  const isLoginPage = location.pathname === "/admin/login";
+
+  // 🔥 GLOBAL GUARD
+  if (!token && !isLoginPage) {
+    return <Navigate to="/admin/login" />;
+  }
+
+  if (token && isLoginPage) {
+    return <Navigate to="/admin" />;
+  }
+
+  return (
+    <Box minH="100vh" bg="gray.50">
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          {/* LOGIN */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+
+          {/* PRIVATE ROUTES */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route element={<AdminDashboard />}>
+              <Route index element={<AdminHome />} />
+              <Route path="dashboard" element={<AdminHome />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="products/:id" element={<AdminProductDetail />} />
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="users" element={<AdminUsers />} />
+            </Route>
+          </Route>
+        </Routes>
+      </Suspense>
+    </Box>
+  );
+}
