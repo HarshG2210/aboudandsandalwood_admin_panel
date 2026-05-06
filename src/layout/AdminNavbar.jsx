@@ -13,7 +13,7 @@ export default function AdminNavbar() {
       await dispatch(adminLogoutAsync()).unwrap();
 
       // ✅ only if success
-      navigate("/admin/login");
+      navigate("/");
     } catch (err) {
       console.error("Logout failed:", err);
     }

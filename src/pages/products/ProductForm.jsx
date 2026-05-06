@@ -36,7 +36,7 @@ export default function ProductForm({ selectedProduct, onSuccess }) {
     purpose: "",
     sustainability: "",
     tags: [],
-    bead_count: "",
+    bead_count: null,
     bead_size: "",
     rating: "",
     variants: [],
@@ -46,8 +46,14 @@ export default function ProductForm({ selectedProduct, onSuccess }) {
 
   // ================= PREFILL =================
   useEffect(() => {
-    if (selectedProduct) {
-      setForm({
+    if (!selectedProduct) return;
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setForm((prev) => {
+      // prevent unnecessary re-render
+      if (prev.name === selectedProduct.name) return prev;
+
+      return {
         name: selectedProduct.name || "",
         short_description: selectedProduct.short_description || "",
         category: selectedProduct.category || "",
@@ -58,13 +64,13 @@ export default function ProductForm({ selectedProduct, onSuccess }) {
         scent: selectedProduct.scent || "",
         purpose: selectedProduct.purpose || "",
         sustainability: selectedProduct.sustainability || "",
-        bead_count: selectedProduct.bead_count || "",
+        bead_count: selectedProduct.bead_count || null,
         bead_size: selectedProduct.bead_size || "",
         tags: selectedProduct.tags ? [selectedProduct.tags] : [],
         rating: selectedProduct.rating || "",
         variants: selectedProduct.variants || [],
-      });
-    }
+      };
+    });
   }, [selectedProduct]);
 
   // ================= HANDLERS =================
@@ -109,7 +115,17 @@ export default function ProductForm({ selectedProduct, onSuccess }) {
     const payload = {
       ...form,
       rating: Number(form.rating),
+
+      // ✅ FIX HERE
+      bead_count:
+        form.bead_count === "" || form.bead_count === null
+          ? null
+          : Number(form.bead_count),
+
+      bead_size: form.bead_size === "" || form.bead_size === null,
+
       tags: form.tags.length > 0 ? form.tags[0] : "",
+
       variants: form.variants.map((v) => ({
         ...v,
         price: Number(v.price),
@@ -137,6 +153,11 @@ export default function ProductForm({ selectedProduct, onSuccess }) {
     }
   };
 
+  const handleClear = () => {
+    setForm(getInitialState());
+    if (onSuccess) onSuccess();
+  };
+
   // ✅ SAFE LOADING STATE
   if (loading) {
     return (
@@ -149,9 +170,15 @@ export default function ProductForm({ selectedProduct, onSuccess }) {
   return (
     <Box bg="white" p={6} borderRadius="2xl" boxShadow="lg" color="oud.800">
       <VStack spacing={4} align="stretch">
-        <Text fontSize="xl" fontWeight="bold">
-          Product Info
-        </Text>
+        <HStack justify="space-between">
+          <Text fontSize="xl" fontWeight="bold">
+            Product Info
+          </Text>
+
+          <Button size="sm" variant="outline" onClick={handleClear}>
+            Clear Form
+          </Button>
+        </HStack>
         <Input
           placeholder="Product Name"
           value={form.name}
@@ -220,7 +247,7 @@ export default function ProductForm({ selectedProduct, onSuccess }) {
         <Input
           type="number"
           placeholder="Bead Count"
-          value={form.bead_count}
+          value={form.bead_count ?? ""}
           onChange={(e) => handleChange("bead_count", e.target.value)}
         />
 

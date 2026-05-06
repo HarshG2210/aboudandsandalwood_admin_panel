@@ -26,11 +26,11 @@ export default function AdminApp() {
   // 🔐 TOKEN CHECK
   const token = localStorage.getItem("admin_access");
 
-  const isLoginPage = location.pathname === "/admin/login";
+  const isLoginPage = location.pathname === "/";
 
   // 🔥 GLOBAL GUARD
   if (!token && !isLoginPage) {
-    return <Navigate to="/admin/login" />;
+    return <Navigate to="/" />;
   }
 
   if (token && isLoginPage) {
@@ -42,7 +42,7 @@ export default function AdminApp() {
       <Suspense fallback={<Loader />}>
         <Routes>
           {/* LOGIN */}
-          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/" element={<AdminLogin />} />
 
           {/* PRIVATE ROUTES */}
           <Route path="/admin" element={<AdminLayout />}>
