@@ -28,15 +28,12 @@ export default function AdminProducts() {
 
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // use Redux value directly if available
+  const activeProduct = selectedProduct || singleProduct;
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (singleProduct) {
-      setSelectedProduct(singleProduct);
-    }
-  }, [singleProduct]);
 
   if (loading) {
     return (
@@ -95,7 +92,7 @@ export default function AdminProducts() {
             <Box flex="1" p={10} bg="ivory">
               <Flex justify="space-between" align="center" mb={6}>
                 <Text fontSize="2xl" fontWeight="bold" color="oud.800">
-                  {selectedProduct ? "Edit Product " : "Create Product "}
+                  {activeProduct ? "Edit Product" : "Create Product"}{" "}
                 </Text>
 
                 {selectedProduct && (
@@ -111,7 +108,7 @@ export default function AdminProducts() {
                 )}
               </Flex>
               <ProductForm
-                selectedProduct={selectedProduct}
+                selectedProduct={activeProduct}
                 onSuccess={() => setSelectedProduct(null)}
               />
             </Box>

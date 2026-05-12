@@ -1,4 +1,4 @@
-import { adminRequest } from "./apiAdminRequest";
+import { adminRequest } from "../api/apiAdminRequest";
 
 export const productService = {
   // CREATE

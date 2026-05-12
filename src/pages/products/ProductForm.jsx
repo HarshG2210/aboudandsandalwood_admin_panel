@@ -122,7 +122,10 @@ export default function ProductForm({ selectedProduct, onSuccess }) {
           ? null
           : Number(form.bead_count),
 
-      bead_size: form.bead_size === "" || form.bead_size === null,
+      bead_size:
+        form.bead_size === "" || form.bead_size === null
+          ? null
+          : Number(form.bead_size),
 
       tags: form.tags.length > 0 ? form.tags[0] : "",
 

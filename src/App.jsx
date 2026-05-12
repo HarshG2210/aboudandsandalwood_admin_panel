@@ -8,10 +8,14 @@ const AdminLayout = lazy(() => import("./layout/AdminLayout"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const AdminHome = lazy(() => import("./pages/AdminHome"));
 const AdminProducts = lazy(() => import("./pages/products/AdminProducts"));
-const AdminOrders = lazy(() => import("./pages/AdminOrders"));
-const AdminUsers = lazy(() => import("./pages/AdminUsers"));
+const AdminOrders = lazy(() => import("./pages/orders/AdminOrders"));
+const AdminUsers = lazy(() => import("./pages/users/AdminUsers"));
 const AdminProductDetail = lazy(() =>
   import("./pages/products/AdminProductDetail")
+);
+const AdminStock = lazy(() => import("./pages/stocks/StockHistoryPage"));
+const AdminPendingUsers = lazy(() =>
+  import("./pages/pendingUsers/AdminPendingUsers")
 );
 
 const Loader = () => (
@@ -53,6 +57,8 @@ export default function AdminApp() {
               <Route path="products/:id" element={<AdminProductDetail />} />
               <Route path="orders" element={<AdminOrders />} />
               <Route path="users" element={<AdminUsers />} />
+              <Route path="stock" element={<AdminStock />} />
+              <Route path="pending-users" element={<AdminPendingUsers />} />
             </Route>
           </Route>
         </Routes>
