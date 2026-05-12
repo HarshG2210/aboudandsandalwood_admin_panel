@@ -6,7 +6,7 @@ import { Suspense, lazy } from "react";
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminLayout = lazy(() => import("./layout/AdminLayout"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
-const AdminHome = lazy(() => import("./pages/AdminHome"));
+const AdminHome = lazy(() => import("./pages/home/AdminHome"));
 const AdminProducts = lazy(() => import("./pages/products/AdminProducts"));
 const AdminOrders = lazy(() => import("./pages/orders/AdminOrders"));
 const AdminUsers = lazy(() => import("./pages/users/AdminUsers"));

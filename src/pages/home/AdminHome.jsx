@@ -40,10 +40,10 @@ import {
 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchOrders } from "../store/slices/ordersSlice";
-import { fetchPendingUsers } from "../store/slices/pendingUserSlice";
-import { fetchProducts } from "../store/slices/productSlice";
-import { fetchRegisteredUsers } from "../store/slices/registeredUserSlice";
+import { fetchOrders } from "../../store/slices/ordersSlice";
+import { fetchPendingUsers } from "../../store/slices/pendingUserSlice";
+import { fetchProducts } from "../../store/slices/productSlice";
+import { fetchRegisteredUsers } from "../../store/slices/registeredUserSlice";
 import { useEffect } from "react";
 
 // COLORS
@@ -53,7 +53,7 @@ export default function AdminHome() {
   const dispatch = useDispatch();
   // ================= STORE DATA =================
   const products = useSelector((s) => s.product.products || []);
-  const orders = useSelector((s) => s.orders?.orders || []);
+  const orders = useSelector((s) => s.orders?.list || []);
   const users = useSelector((s) => s.registeredUsers?.users || []);
   const pendingUsers = useSelector((s) => s.pendingUsers?.users || []);
 
