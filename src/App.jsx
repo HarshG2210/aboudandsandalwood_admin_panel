@@ -17,6 +17,12 @@ const AdminStock = lazy(() => import("./pages/stocks/StockHistoryPage"));
 const AdminPendingUsers = lazy(() =>
   import("./pages/pendingUsers/AdminPendingUsers")
 );
+const AdminHeroSection = lazy(() => import("./pages/hero/AdminHeroSection"));
+const AdminBlog = lazy(() => import("./pages/blog/AdminBlog"));
+const AdminFakeReviews = lazy(() =>
+  import("./pages/fakeReviews/AdminFakeReviews")
+);
+const AdminContacts = lazy(() => import("./pages/contact/AdminContacts"));
 
 const Loader = () => (
   <Center h="100vh">
@@ -59,6 +65,10 @@ export default function AdminApp() {
               <Route path="users" element={<AdminUsers />} />
               <Route path="stock" element={<AdminStock />} />
               <Route path="pending-users" element={<AdminPendingUsers />} />
+              <Route path="hero" element={<AdminHeroSection />} />
+              <Route path="blog" element={<AdminBlog />} />
+              <Route path="fake-reviews" element={<AdminFakeReviews />} />
+              <Route path="contacts" element={<AdminContacts />} />
             </Route>
           </Route>
         </Routes>

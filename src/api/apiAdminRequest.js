@@ -58,6 +58,7 @@ export async function adminRequest(endpoint, options = {}) {
     // ================= SUCCESS =================
     if (
       options.method === "POST" ||
+      options.method === "PUT" ||
       options.method === "PATCH" ||
       options.method === "DELETE"
     ) {

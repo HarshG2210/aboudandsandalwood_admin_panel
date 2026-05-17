@@ -20,7 +20,10 @@ import {
 import {
   FiBox,
   FiClock,
+  FiEdit,
   FiHome,
+  FiImage,
+  FiMail,
   FiMenu,
   FiShoppingCart,
   FiTrendingUp,
@@ -36,6 +39,14 @@ const menu = [
   { path: "/admin/products", label: "Products", icon: FiBox },
   { path: "/admin/orders", label: "Orders", icon: FiShoppingCart },
   { path: "/admin/stock", label: "Stock", icon: FiTrendingUp },
+  { path: "/admin/hero", label: "Hero Section", icon: FiImage },
+  { path: "/admin/blog", label: "Blog", icon: FiEdit },
+  { path: "/admin/fake-reviews", label: "Fake Reviews", icon: FiEdit },
+  {
+    path: "/admin/contacts",
+    label: "Contact Enquiries",
+    icon: FiMail,
+  },
 ];
 
 export default function AdminDashboard() {

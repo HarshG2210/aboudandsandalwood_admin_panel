@@ -315,6 +315,14 @@ export default function AdminUsers() {
                           fontSize="sm"
                           wordBreak="break-word"
                         >
+                          User ID :- {u.id}
+                        </Text>
+
+                        <Text
+                          color="whiteAlpha.900"
+                          fontSize="sm"
+                          wordBreak="break-word"
+                        >
                           {u.email}
                         </Text>
                       </Box>

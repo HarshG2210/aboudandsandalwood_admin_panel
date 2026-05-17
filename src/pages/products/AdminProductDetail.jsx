@@ -13,7 +13,10 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon, StarIcon } from "@chakra-ui/icons";
-import { deleteProduct, fetchProductById } from "../../store/slices/productSlice";
+import {
+  deleteProduct,
+  fetchProductById,
+} from "../../store/slices/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -100,6 +103,14 @@ export default function AdminProductDetail() {
               letterSpacing="tight"
             >
               {singleProduct.name}
+            </Text>
+            <Text
+              fontSize={{ base: "3xl", md: "4xl" }}
+              fontWeight="bold"
+              color="gray.800"
+              letterSpacing="tight"
+            >
+              Product ID :- {singleProduct.id}
             </Text>
             <HStack mt={2}>
               {tags.map((tag, i) => (
